@@ -33,13 +33,28 @@ document.querySelector('#listaAmigos').innerHTML='';
 console.log(arrayAmigos.length)
 
 for (var contador=0; contador<arrayAmigos.length; contador++) {
-   let li = document.createElement('li');
+   escribirLista('listaAmigos',arrayAmigos,contador);
+   /*let li = document.createElement('li');
 
    li.textContent=arrayAmigos[contador]
    document.querySelector('#listaAmigos').appendChild(li);
-  console.log(arrayAmigos[contador]);
+  console.log(arrayAmigos[contador]);*/
 
 };
 };
+function escribirLista(id,array,numero){
+   let li = document.createElement('li');
+   li.textContent=array[numero];
+   document.getElementById(id).appendChild(li);
+   console.log(li.textContent);
+};
 
-function sortearAmigo(){};
+function sortearAmigo(){
+   let numeroNuevo= Math.floor(Math.random()*10+1);
+   console.log(numeroNuevo);
+   if(numeroNuevo<=arrayAmigos.length){
+      escribirLista('resultado',arrayAmigos,numeroNuevo);
+}else{
+ sortearAmigo();
+};
+};
