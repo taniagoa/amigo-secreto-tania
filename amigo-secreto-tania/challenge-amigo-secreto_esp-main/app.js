@@ -1,5 +1,6 @@
 
 let arrayAmigos=[];
+let listaSorteados=[];
 
 function agregarAmigo(){
 
@@ -9,23 +10,15 @@ function agregarAmigo(){
       
     limpiarCaja();
     crearLista();
-    //alert(listaAmigos);
-    //console.log(arrayAmigos);
     return;
  
  }else{
     alert('ingrese un nombre valido');
  };
- 
     
 };
 function limpiarCaja(){
     return document.querySelector('#amigo').value='';
-};
-function asignarElemento(elemento,texto){
-    let elementoHTML= document.querySelector(elemento);
-    elementoHTML.innerHTML=texto;
-    return;
 };
 
 function crearLista(){
@@ -33,13 +26,7 @@ document.querySelector('#listaAmigos').innerHTML='';
 console.log(arrayAmigos.length)
 
 for (var contador=0; contador<arrayAmigos.length; contador++) {
-   escribirLista('listaAmigos',arrayAmigos,contador);
-   /*let li = document.createElement('li');
-
-   li.textContent=arrayAmigos[contador]
-   document.querySelector('#listaAmigos').appendChild(li);
-  console.log(arrayAmigos[contador]);*/
-
+   escribirLista('listaAmigos',arrayAmigos,contador);  
 };
 };
 function escribirLista(id,array,numero){
@@ -50,11 +37,38 @@ function escribirLista(id,array,numero){
 };
 
 function sortearAmigo(){
-   let numeroNuevo= Math.floor(Math.random()*10+1);
+   if(arrayAmigos.length>=3){
+   
+   let numeroNuevo= Math.floor(Math.random()*10);
    console.log(numeroNuevo);
    if(numeroNuevo<=arrayAmigos.length){
-      escribirLista('resultado',arrayAmigos,numeroNuevo);
+      //escribirLista('resultado',arrayAmigos,numeroNuevo);
+      
+     if(listaSorteados.includes(numeroNuevo)){
+      sortearAmigo();
+     } else{
+       escribirLista('resultado',arrayAmigos,numeroNuevo);
+      listaSorteados.push(numeroNuevo);
+     };
 }else{
- sortearAmigo();
+   if(listaSorteados.length>=arrayAmigos.length){
+      
+      document.getElementById('sortear').disabled=true;
+      document.querySelector('h2').innerHTML="ya sorteaste todos los nombres";
+   }else{
+      sortearAmigo();
+   }
+ 
 };
+}else{
+   alert('ingrese al menos tres nombres');
+};
+};
+function reiniciarJuego(){
+   arrayAmigos.length=0;
+   listaSorteados.length=0;
+   document.querySelector('#listaAmigos').innerHTML='';
+   document.querySelector('#resultado').innerHTML='';
+   document.getElementById('sortear').disabled=false;
+   document.querySelector('h2').innerHTML="Digite el nombre de sus amigos";
 };
