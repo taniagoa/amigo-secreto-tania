@@ -1,7 +1,7 @@
-
+//valores iniciales
 let arrayAmigos=[];
 let listaSorteados=[];
-
+// funcion que agrega a la lista de amigos los nombres que escribimos en la caja de texto
 function agregarAmigo(){
 
  var nombreAmigo = document.getElementById("amigo").value;
@@ -20,20 +20,21 @@ function agregarAmigo(){
 function limpiarCaja(){
     return document.querySelector('#amigo').value='';
 };
-
+//funcion que recorre el arrayAmigos para escribirlos en la lista visible 
 function crearLista(){
 document.querySelector('#listaAmigos').innerHTML='';
-console.log(arrayAmigos.length)
+//console.log(arrayAmigos.length)
 
 for (var contador=0; contador<arrayAmigos.length; contador++) {
    escribirLista('listaAmigos',arrayAmigos,contador);  
 };
 };
+//funcion que llena una lista en la pagina html con el contenido de un array
 function escribirLista(id,array,numero){
    let li = document.createElement('li');
    li.textContent=array[numero];
    document.getElementById(id).appendChild(li);
-   console.log(li.textContent);
+  // console.log(li.textContent);
 };
 
 function sortearAmigo(){
@@ -41,7 +42,7 @@ function sortearAmigo(){
    
    let numeroNuevo= Math.floor(Math.random()*10);
    console.log(numeroNuevo);
-   if(numeroNuevo<=arrayAmigos.length){
+   if(numeroNuevo<arrayAmigos.length){
       //escribirLista('resultado',arrayAmigos,numeroNuevo);
       
      if(listaSorteados.includes(numeroNuevo)){
